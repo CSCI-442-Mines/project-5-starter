@@ -551,7 +551,7 @@ how to run your program and the flags it accepts and then
 Collaboration Policy
 ====================
 
-This is an **individual project**.  All code you submit should be
+This is an **team project**.  All code you submit should be
 written by yourself.  You should not share your code with others.
 
 Please see the syllabus for the full collaboration policy.
