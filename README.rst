@@ -2,7 +2,7 @@
 CSCI-442 - Project 5 - A Simple Memory Management Simulator
 ***********************************************************
 
-Introduction
+1) Introduction
 ============
 
 For this project, you will implement a simulation of an operating
@@ -14,17 +14,17 @@ the number of memory accesses, page faults, and free frames remaining in
 the system.
 
 This project must be implemented in C++, and it must execute correctly
-on Isengard.
+on Isengard although feel free to develop on your local machine!
 
-Deliverables
+2) Deliverables
 ============
 
-Deliverable 1
+2.1) Deliverable 1
 -------------
 
 -  All unit tests in the starter code pass when running ``make test``.
 
-Deliverable 2
+2.2.) Deliverable 2
 -------------
 
 -  All functionality from Deliverable 1
@@ -40,6 +40,8 @@ Deliverable 2
 
 -  Details about individual memory accesses are correctly displayed when
    the ``–-verbose`` flag is set (Section 8).
+   
+-  Pass all tests ``./test-my-work.sh``.
 
 Examples of the correct output for this deliverable are provided with
 the starter code.
@@ -49,7 +51,7 @@ the starter code.
 
         PageBreak
 
-Grading
+3) Grading
 =======
 
 Grading for this project will be based on:
@@ -68,19 +70,15 @@ mentioned in Section 8.**
 Make sure all debugging and other non-required print statements have
 been commented out before submitting your deliverables.
 
-Requirements and Reference
+4) Requirements and Reference
 ==========================
 
 - You are **required** to use the starter code provided for this project.
 
--  To compile your code, the grader should be to ``cd`` into it and
+-  To compile your code, the grader should be able to ``cd`` into it and
    simply type ``make``. Typing ``make test`` should run the unit tests,
    all of which should pass. The grader must be able to do this using
    the ``Makefile`` that is provided with the starter code.
-
--  Do not modify the ``Makefile`` provided in the starter code. The
-   grader will be replacing the ``Makefile`` with a copy of the one
-   provided with the starter code during grading.
 
 -  The grader must be able to execute your program by typing
    ``./mem-sim`` from the root of your repository.
@@ -101,7 +99,7 @@ Requirements and Reference
 
         PageBreak
 
-Submission Checklist
+5) Submission Checklist
 ====================
 
 Please make sure that you have done all of the following *prior* to
@@ -135,7 +133,7 @@ submission:
 
 #. The ``zip`` file made by ``./make-submission`` is uploaded to Gradescope correctly.
 
-Getting Started
+6) Getting Started
 ===============
 
 You have been provided with starter code that has some
@@ -174,7 +172,7 @@ the ``Simulation`` class with the correct variables and functions.
 
         PageBreak
 
-Where to Start?
+6.1) Where to Start?
 ---------------
 
 It is recommended that you start the project by implementing the
@@ -201,7 +199,7 @@ what the maximum number of frames for a process
 should be (Section 6), or what replacement strategy
 you should be using (Section 7).
 
-Unit Tests
+6.2) Unit Tests
 ----------
 
 The starter code contains a number of unit tests to help you implement
@@ -226,7 +224,7 @@ test cases, you would type:
 
 ``make test TEST_FILTER="Process.TotalSize"``
 
-Output Testing
+6.3) Output Testing
 --------------
 
 The starter code also has example outputs and a script that you can run
@@ -251,7 +249,7 @@ it is suggested that you read them carefully.
 
         PageBreak
 
-Simulation Properties
+7) Simulation Properties
 =====================
 
 Your program will simulate memory management for a hypothetical computer
@@ -308,7 +306,7 @@ system with the following attributes:
    allocated frames, it needs to pick one of its pages that is in main
    memory to replace.
 
-Replacement Strategies
+8) Replacement Strategies
 ======================
 
 Your memory management simulation must support two different
@@ -318,7 +316,7 @@ be provided as a command-line flag, as discussed in Section 10.
 Both of these strategies should be implemented as they are described in
 your textbook. While LRU is not feasible to implement in real operating
 systems, your simulation has no such problem. You are free to keep track
-of whatever dat you need to implement the two required strategies,
+of whatever you need to implement the two required strategies,
 regardless of how feasible the collection of that data would be in a
 real OS.
 
@@ -326,13 +324,13 @@ real OS.
 
         PageBreak
 
-Required Output
+9) Required Output
 ===============
 
 Examples of all outputs can be found within the starter code under
 ``tests/``.
 
-You Need to Implement
+9.1) Not Implemented for you
 ---------------------
 
 ``–verbose``
@@ -366,7 +364,7 @@ It is recommended that you take advantage of the ``<<`` operator
 overloads written for the virtual and physical address classes when
 printing this information.
 
-Implemented For You
+9.2) Implemented For You
 -------------------
 
 This section is provided for your reference. All the logging and output
@@ -403,27 +401,8 @@ Here is an example of how this should look:
    Total page faults:                 101
    Free frames remaining:             482
 
-``–csv``
-~~~~~~~~
 
-If ``-–csv`` or ``--c`` is specified, your simulation must output the same
-information as mentioned above, but in the format shown below:
-
-::
-
-   10,30,19,63.33,10
-   42,31,29,93.55,10
-   99,53,53,100.00,10
-   114,,,,
-   101,,,,
-   482,,,,
-
-**When the ``–csv`` flag is provided, your program should not print
-anything else, even if the ``–verbose`` flag is also provided in the
-command line. (This is taken care of for you within the provided flag
-parsing functionality.)**
-
-Simulation File Format
+10) Simulation File Format
 ======================
 
 This section is provided as a reference. All the file input parsing has
@@ -478,7 +457,7 @@ dummy process images under the ``inputs/`` directory.
 
 .. _sec:flags:
 
-Command-Line Flags
+11) Command-Line Flags
 ==================
 
 This section is provided as a reference. All the command line input
@@ -548,10 +527,10 @@ how to run your program and the flags it accepts and then
 
         PageBreak
 
-Collaboration Policy
+12) Collaboration Policy
 ====================
 
-This is an **team project**.  All code you submit should be
+This is an **individual project**.  All code you submit should be
 written by yourself.  You should not share your code with others.
 
 Please see the syllabus for the full collaboration policy.
@@ -560,7 +539,7 @@ Please see the syllabus for the full collaboration policy.
 
    **Plagarism will be punished harshly!**
 
-Access to Isengard
+13) Access to Isengard
 ==================
 
 Remote access to Isengard is quite similar to ALAMODE, but the
