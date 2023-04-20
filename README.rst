@@ -3,7 +3,7 @@ CSCI-442 - Project 5 - A Simple Memory Management Simulator
 ***********************************************************
 
 1) Introduction
-============
+===============
 
 For this project, you will implement a simulation of an operating
 system’s memory manager. The simulation will read files representing the
@@ -17,15 +17,15 @@ This project must be implemented in C++, and it must execute correctly
 on Isengard although feel free to develop on your local machine!
 
 2) Deliverables
-============
+===============
 
 2.1) Deliverable 1
--------------
+------------------
 
 -  All unit tests in the starter code pass when running ``make test``.
 
 2.2.) Deliverable 2
--------------
+-------------------
 
 -  All functionality from Deliverable 1
 
@@ -52,7 +52,7 @@ the starter code.
         PageBreak
 
 3) Grading
-=======
+==========
 
 Grading for this project will be based on:
 
@@ -71,7 +71,7 @@ Make sure all debugging and other non-required print statements have
 been commented out before submitting your deliverables.
 
 4) Requirements and Reference
-==========================
+=============================
 
 - You are **required** to use the starter code provided for this project.
 
@@ -100,7 +100,7 @@ been commented out before submitting your deliverables.
         PageBreak
 
 5) Submission Checklist
-====================
+=======================
 
 Please make sure that you have done all of the following *prior* to
 submission:
@@ -134,7 +134,7 @@ submission:
 #. The ``zip`` file made by ``./make-submission`` is uploaded to Gradescope correctly.
 
 6) Getting Started
-===============
+==================
 
 You have been provided with starter code that has some
 basic functionality implemented and a set of unit tests to help you with
@@ -173,7 +173,7 @@ the ``Simulation`` class with the correct variables and functions.
         PageBreak
 
 6.1) Where to Start?
----------------
+--------------------
 
 It is recommended that you start the project by implementing the
 functionality for the various classes that have been provided for you.
@@ -200,7 +200,7 @@ should be (Section 6), or what replacement strategy
 you should be using (Section 7).
 
 6.2) Unit Tests
-----------
+---------------
 
 The starter code contains a number of unit tests to help you implement
 the various data structures in the project. To run the tests, run the
@@ -225,7 +225,7 @@ test cases, you would type:
 ``make test TEST_FILTER="Process.TotalSize"``
 
 6.3) Output Testing
---------------
+-------------------
 
 The starter code also has example outputs and a script that you can run
 to verify your solution with the provided outputs. The example outputs
@@ -250,7 +250,7 @@ it is suggested that you read them carefully.
         PageBreak
 
 7) Simulation Properties
-=====================
+========================
 
 Your program will simulate memory management for a hypothetical computer
 system with the following attributes:
@@ -307,7 +307,7 @@ system with the following attributes:
    memory to replace.
 
 8) Replacement Strategies
-======================
+=========================
 
 Your memory management simulation must support two different
 page-replacement strategies: FIFO and LRU. Which strategy to use should
@@ -325,13 +325,13 @@ real OS.
         PageBreak
 
 9) Required Output
-===============
+==================
 
 Examples of all outputs can be found within the starter code under
 ``tests/``.
 
 9.1) Not Implemented for you
----------------------
+----------------------------
 
 ``–verbose``
 ~~~~~~~~~~~~
@@ -365,7 +365,7 @@ overloads written for the virtual and physical address classes when
 printing this information.
 
 9.2) Implemented For You
--------------------
+------------------------
 
 This section is provided for your reference. All the logging and output
 functionality in this section has been written for you.
@@ -403,7 +403,7 @@ Here is an example of how this should look:
 
 
 10) Simulation File Format
-======================
+==========================
 
 This section is provided as a reference. All the file input parsing has
 been written for you.
@@ -458,7 +458,7 @@ dummy process images under the ``inputs/`` directory.
 .. _sec:flags:
 
 11) Command-Line Flags
-==================
+======================
 
 This section is provided as a reference. All the command line input
 parsing has been written for you.
@@ -528,7 +528,7 @@ how to run your program and the flags it accepts and then
         PageBreak
 
 12) Collaboration Policy
-====================
+========================
 
 This is an **individual project**.  All code you submit should be
 written by yourself.  You should not share your code with others.
@@ -540,7 +540,7 @@ Please see the syllabus for the full collaboration policy.
    **Plagarism will be punished harshly!**
 
 13) Access to Isengard
-==================
+======================
 
 Remote access to Isengard is quite similar to ALAMODE, but the
 hostname is ``isengard.mines.edu``.
