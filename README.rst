@@ -16,18 +16,10 @@ the system.
 This project must be implemented in C++, and it must execute correctly
 on Isengard although feel free to develop on your local machine!
 
-2) Deliverables
+2) Deliverable
 ===============
 
-2.1) Deliverable 1
-------------------
-
 -  All unit tests in the starter code pass when running ``make test``.
-
-2.2.) Deliverable 2
--------------------
-
--  All functionality from Deliverable 1
 
 -  The replacement strategy can be specified using the ``-–strategy``
    flag (Section 7, Section 10).
