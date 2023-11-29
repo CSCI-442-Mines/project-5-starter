@@ -11,8 +11,7 @@
 Simulation::Simulation(FlagOptions& flags)
 {
     this->flags = flags;
-    this->frames.reserve(this->NUM_FRAMES);
-    
+    this->frames.resize(this->NUM_FRAMES);
 }
 
 void Simulation::run() {
