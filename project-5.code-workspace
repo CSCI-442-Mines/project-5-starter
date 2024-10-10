@@ -1,0 +1,132 @@
+{
+  "extensions": {
+    "recommendations": [
+      "EditorConfig.EditorConfig",
+      "ms-vscode.cpptools-extension-pack"
+    ]
+  },
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Launch Memory Simulator",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder}/mem-sim",
+        "args": [
+          // Add CLI arguments here
+        ],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}",
+        "environment": [],
+        "externalConsole": false,
+        "preLaunchTask": "Build",
+        "MIMode": "gdb",
+        "setupCommands": [
+          {
+            "description": "Enable pretty-printing for gdb",
+            "text": "-enable-pretty-printing",
+            "ignoreFailures": true
+          },
+          {
+            "description": "Set Disassembly Flavor to Intel",
+            "text": "-gdb-set disassembly-flavor intel",
+            "ignoreFailures": true
+          }
+        ]
+      }
+    ],
+    "compounds": []
+  },
+  "settings": {
+    "testMate.cpp.discovery.loadOnStartup": true,
+    "testMate.cpp.test.advancedExecutables": [
+      {
+        "pattern": "${workspaceFolder}/bin/all_tests",
+        "runTask": {
+          "before": ["Build (Test)"]
+        }
+      }
+    ],
+    "testMate.cpp.debug.configTemplate": {
+      "name": "Launch Memory Simulator",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/bin/all_tests",
+      "args": [
+        "${command:testMate.cmd.get-debug-args}"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "preLaunchTask": "Build (Test)",
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        },
+        {
+          "description": "Set Disassembly Flavor to Intel",
+          "text": "-gdb-set disassembly-flavor intel",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Build",
+        "command": "make",
+        "args": [],
+        "type": "shell",
+        "problemMatcher": [
+          "$tsc"
+        ],
+        "presentation": {
+          "reveal": "always"
+        },
+        "group": "build"
+      },
+      {
+        "label": "Build (Test)",
+        "command": "make",
+        "args": [
+          "bin/all_tests"
+        ],
+        "type": "shell",
+        "problemMatcher": [
+          "$tsc"
+        ],
+        "presentation": {
+          "reveal": "always"
+        },
+        "group": "build"
+      },
+      {
+        "label": "Clean",
+        "command": "make",
+        "args": [
+          "clean"
+        ],
+        "type": "shell",
+        "problemMatcher": [
+          "$tsc"
+        ],
+        "presentation": {
+          "reveal": "always"
+        },
+        "group": "build"
+      }
+    ]
+  }
+}
