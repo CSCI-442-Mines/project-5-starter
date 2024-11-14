@@ -11,6 +11,8 @@
 Simulation::Simulation(FlagOptions& flags)
 {
     this->flags = flags;
+
+    // NOTE: this initializes this->frames to have NUM_FRAMES number of elements!!!
     this->frames.resize(this->NUM_FRAMES);
 }
 

@@ -65,15 +65,19 @@ bool parse_flags(int argc, char** argv, FlagOptions& flags) {
                 flags.verbose = false;
                 break;
 
-            case 's':
-                if (string(optarg) == "FIFO") {
+            case 's': {
+                string strategy = string(optarg);
+                transform(strategy.begin(), strategy.end(), strategy.begin(), ::toupper);
+
+                if (string(strategy) == "FIFO") {
                     flags.strategy = ReplacementStrategy::FIFO;
-                } else if (string(optarg) == "LRU") {
+                } else if (string(strategy) == "LRU") {
                     flags.strategy = ReplacementStrategy::LRU;
                 } else {
                     return false;
                 }
                 break;
+            }
 
             case 'f':
                 flags.max_frames = atoi(optarg);

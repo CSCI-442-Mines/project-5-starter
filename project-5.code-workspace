@@ -20,7 +20,12 @@
         "request": "launch",
         "program": "${workspaceFolder}/mem-sim",
         "args": [
-          // Add CLI arguments here
+          "--${input:outputMode}",
+          "--strategy",
+          "${input:strategy}",
+          "--max-frames",
+          "${input:maxFrameNumber}",
+          "${workspaceFolder}/tests/input/simulation/${input:testNumber}"
         ],
         "stopAtEntry": false,
         "cwd": "${workspaceFolder}",
@@ -42,7 +47,49 @@
         ]
       }
     ],
-    "compounds": []
+    "compounds": [],
+    "inputs": [
+      {
+        "id": "strategy",
+        "type": "pickString",
+        "description": "Strategy",
+        "options": [
+          "fifo",
+          "lru"
+        ],
+        "default": "fifo"
+      },
+      {
+        "id": "testNumber",
+        "type": "pickString",
+        "description": "Test number",
+        "options": [
+          "1",
+          "2",
+          "3"
+        ],
+        "default": "1"
+      },
+      {
+        "id": "maxFrameNumber",
+        "type": "pickString",
+        "description": "Maximum number of frames a process may be allocated",
+        "options": [
+          "5",
+          "10"
+        ],
+        "default": "5"
+      },
+      {
+        "id": "outputMode",
+        "type": "pickString",
+        "description": "Output mode",
+        "options": [
+          "verbose"
+        ],
+        "default": "verbose"
+      }
+    ]
   },
   "settings": {
     "testMate.cpp.discovery.loadOnStartup": true,

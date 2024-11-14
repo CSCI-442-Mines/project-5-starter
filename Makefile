@@ -61,7 +61,7 @@ test: bin/all_tests
 
 # Remove all generated files.
 clean:
-	rm -rf $(NAME)* bin/
+	rm -rf $(NAME)* bin/ tests/output/{*,*/*}/*.{actual,diff}
 
 # Ensure the bin/ directories are created.
 $(SRCS): | bin
