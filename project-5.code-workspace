@@ -92,12 +92,18 @@
     ]
   },
   "settings": {
+    "C_Cpp.default.cStandard": "gnu17",
+    "C_Cpp.default.cppStandard": "gnu++17",
+    "C_Cpp.default.compilerPath": "/usr/bin/g++",
+    "C_Cpp.default.intelliSenseMode": "linux-gcc-x64",
     "testMate.cpp.discovery.loadOnStartup": true,
     "testMate.cpp.test.advancedExecutables": [
       {
         "pattern": "${workspaceFolder}/bin/all_tests",
         "runTask": {
-          "before": ["Build (Test)"]
+          "before": [
+            "Build (Test)"
+          ]
         }
       }
     ],

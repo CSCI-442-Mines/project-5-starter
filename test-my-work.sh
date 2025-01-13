@@ -99,10 +99,8 @@ function run_test {
 }
 
 # Build everything
-if [ ! -f "${BINARY}" ]; then
-	echo -e "${DEBUG} Building everything..."
-  make mem-sim bin/all_tests
-fi
+echo -e "${DEBUG} Building everything..."
+make mem-sim bin/all_tests
 
 ALL_TESTS_PASSED=true
 
