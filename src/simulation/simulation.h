@@ -23,7 +23,7 @@
 
 
 /**
-* Class responsible for running the memory simulation. 
+* Class responsible for running the memory simulation.
 */
 
 class Simulation {
@@ -67,7 +67,7 @@ public:
     int read_simulation_file();
     int read_addresses(std::istream& simulation_file);
     int read_processes(std::istream& simulation_file);
-    
+
     //===================================
     // Member Variables
     //===================================

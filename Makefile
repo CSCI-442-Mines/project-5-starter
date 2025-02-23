@@ -1,14 +1,20 @@
 # To build the program (which is called mem-sim by default), simply type:
 #   make
 #
-#	To run the tests, type:
-#	  make test
+#	To run the unit tests, type:
+#	  make unit-tests
+#
+# To run the end to end (e2e) tests, type:
+#   make e2e-tests
 #
 # To clean up and remove the compiled binary and other generated files, type:
 #   make clean
 #
 # To build AND run the program, type:
 #   make run
+#
+# To make the submission archive, type:
+#   make submission
 #
 
 SHELL = /bin/bash
@@ -56,12 +62,21 @@ run: $(NAME)
 	./$(NAME)
 
 # Build and run the unit tests.
-test: bin/all_tests
+unit-tests: bin/all_tests
 	./bin/all_tests --gtest_filter=$(TEST_FILTER)
+
+# Run the end to end (e2e) tests.
+e2e-tests: unit-tests $(NAME)
+	@./utils/e2e-tests.sh
 
 # Remove all generated files.
 clean:
 	rm -rf $(NAME)* bin/ tests/output/{*,*/*}/*.{actual,diff}
+
+# Make the submission archive.
+submission: e2e-tests
+	@read -p "Enter your Mines multipass username: " USERNAME && \
+	zip -r "$${USERNAME}-submission.zip" ./src ./Makefile ./override.token
 
 # Ensure the bin/ directories are created.
 $(SRCS): | bin

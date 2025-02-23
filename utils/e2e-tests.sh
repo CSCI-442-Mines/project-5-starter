@@ -1,6 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Test your work using the provided test cases
+# End to end (e2e) tests
+# Run this via make e2e-tests
 
 ################################################################################
 #                                   Settings                                   #
@@ -22,6 +23,9 @@ MODES=("verbose")
 #                                  Internals                                   #
 ################################################################################
 
+# Exit on undefined variables and pipe failures
+set -uo pipefail
+
 # ANSI color codes
 GRAY="\033[0;37m"
 RED="\033[0;31m"
@@ -35,11 +39,11 @@ SUCCESS="${GREEN}[SUCCESS]${RESET}"
 WARNING="${YELLOW}[WARNING]${RESET}"
 ERROR="${RED}[ERROR]${RESET}"
 
-# Get the directory of the script
-SCRIPT_DIR="$(dirname "$(readlink -f "${0}")")"
+# Get the directory of the project root
+ROOT_DIR="$(dirname "$(dirname "$(readlink -f "${0}")")")"
 
 # Get the path to the binary
-BINARY="${SCRIPT_DIR}/mem-sim"
+BINARY="${ROOT_DIR}/mem-sim"
 
 # Run a test
 # Parameters:
@@ -49,15 +53,15 @@ BINARY="${SCRIPT_DIR}/mem-sim"
 # - $4: The mode
 # Globals:
 # - BINARY: The path to the binary
-# - SCRIPT_DIR: The directory of the script
+# - ROOT_DIR: The directory of the project root
 function run_test {
 	# Generate the input and output file names
-	local INPUT_SIMULATION_NAME="${SCRIPT_DIR}/tests/input/simulation/${3}"
+	local INPUT_SIMULATION_NAME="${ROOT_DIR}/tests/input/simulation/${3}"
 
-  local OUTPUT_BASE_NAME="${SCRIPT_DIR}/tests/output/${1}/max_frame_${2}/${3}_${4}"
+  local OUTPUT_BASE_NAME="${ROOT_DIR}/tests/output/${1}/max_frame_${2}/${3}_${4}"
 	local OUTPUT_EXEPECTED_NAME="${OUTPUT_BASE_NAME}.expected"
 	local OUTPUT_ACTUAL_NAME="${OUTPUT_BASE_NAME}.actual"
-	local DIFF_NAME="${OUTPUT_BASE_NAME}.diff"
+	local OUTPUT_DIFF_NAME="${OUTPUT_BASE_NAME}.diff"
 
 	local COMMAND="${BINARY} --${4} --strategy ${1} --max-frames ${2} ${INPUT_SIMULATION_NAME}"
 
@@ -74,7 +78,7 @@ function run_test {
 	fi
 
 	# Delete old output files
-	rm -f "${OUTPUT_ACTUAL_NAME}" "${DIFF_NAME}"
+	rm -f ${OUTPUT_BASE_NAME}.{actual,diff}
 
 	# Run the command
 	echo -e "${DEBUG} Running: ${COMMAND} > ${OUTPUT_ACTUAL_NAME}"
@@ -85,56 +89,46 @@ function run_test {
 	fi
 
 	# Compare the output
-	DIFF=$(diff --ignore-space-change --ignore-blank-lines "${OUTPUT_ACTUAL_NAME}" "${OUTPUT_EXEPECTED_NAME}")
+	local DIFF=$(diff --label "Expected output" --label "Actual output" --unified --ignore-space-change --ignore-blank-lines "${OUTPUT_EXEPECTED_NAME}" "${OUTPUT_ACTUAL_NAME}")
 
-	if [ "${DIFF}" == "" ]; then
-		echo -e "${SUCCESS} Test passed! (Strategy: ${1}, max allocatable frame number: ${2}, case: ${3}, mode: ${4}, output: ${OUTPUT_ACTUAL_NAME})"
-	else
-		echo "${DIFF}" > "${DIFF_NAME}"
-        echo -e "${ERROR} Test failed! (Strategy: ${1}, max allocatable frame number: ${2}, case: ${3}, mode: ${4}, diff: ${DIFF_NAME})"
+	if [ "${DIFF}" != "" ]; then
+		echo "${DIFF}" > "${OUTPUT_DIFF_NAME}"
+    echo -e "${ERROR} Test failed! (Strategy: ${1}, max allocatable frame number: ${2}, case: ${3}, mode: ${4}, diff: ${OUTPUT_DIFF_NAME})"
 		return 1
 	fi
+
+  echo -e "${SUCCESS} Test passed! (Strategy: ${1}, max allocatable frame number: ${2}, case: ${3}, mode: ${4}, output: ${OUTPUT_ACTUAL_NAME})"
 
 	return 0
 }
 
-# Build everything
-echo -e "${DEBUG} Building everything..."
-make mem-sim bin/all_tests
+# Check if invoked by Make
+if [ "${MAKELEVEL:-0}" -ne 1 ]; then
+  echo -e "${ERROR} This script should be run via make e2e-tests!"
+  exit 1
+fi
 
+# Run end to end tests
 ALL_TESTS_PASSED=true
+for STRATEGY in "${STRAGIES[@]}"; do
+    for MAX_FRAME_NUMBER in "${MAX_FRAME_NUMBERS[@]}"; do
+        for CASE in "${CASES[@]}"; do
+            for MODE in "${MODES[@]}"; do
+                run_test "${STRATEGY}" "${MAX_FRAME_NUMBER}" "${CASE}" "${MODE}"
 
-# Run unit tests
-echo -e "${DEBUG} Running unit tests..."
-make test
-
-if [ "${?}" -ne 0 ]; then
-    echo -e "${ERROR} Some unit tests failed, skipping end to end tests!"
-    ALL_TESTS_PASSED=false
-else
-    echo -e "${SUCCESS} All unit tests passed!"
-
-    # Run end to end tests
-    for STRATEGY in "${STRAGIES[@]}"; do
-        for MAX_FRAME_NUMBER in "${MAX_FRAME_NUMBERS[@]}"; do
-            for CASE in "${CASES[@]}"; do
-                for MODE in "${MODES[@]}"; do
-                    run_test "${STRATEGY}" "${MAX_FRAME_NUMBER}" "${CASE}" "${MODE}"
-
-                    if [ "${?}" -ne 0 ]; then
-                        ALL_TESTS_PASSED=false
-                    fi
-                done
+                if [ "${?}" -ne 0 ]; then
+                    ALL_TESTS_PASSED=false
+                fi
             done
         done
     done
-fi
+done
 
 # Print the result
 if [ "${ALL_TESTS_PASSED}" == false ]; then
 	echo -e "${ERROR} Some tests failed!"
 	exit 1
 else
-	echo -e "${SUCCESS} All configured tests passed!"
+	echo -e "${SUCCESS} All configured end to end tests passed!"
 	exit 0
 fi
