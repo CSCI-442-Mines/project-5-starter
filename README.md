@@ -1,5 +1,16 @@
 # CSCI-442 - Project 5 - A Simple Memory Management Simulator
 
+> [!WARNING]
+>
+> Please see the assignment on Canvas for dates.
+
+> [!IMPORTANT]
+>
+> - You'll want to read this **entire document** before beginning the project. Please ask any
+>   questions you have on Piazza, but only if this README does not answer your question.
+> - Finally, this is a **large project**. Be sure to start early. If you wait until a few days
+>   before the due date, you are unlikely to finish in time.
+
 ## Introduction
 
 For this project, you will implement a simulation of an operating system's memory manager. The
@@ -11,10 +22,32 @@ free frames remaining in the system.
 This project must be implemented in C++, and it must execute correctly in Gradescope although feel
 free to develop on your local machine!
 
-## Deliverable
+Note that this project may be split into two deliverables or combined into one single deliverable in
+a given semester. Additionally, one, both, or neither of the deliverables may be extra-credit.
+Please check the assignment(s) in Canvas for the specific details.
 
+## Project Requirements
+
+You will create a program called `mem-sim`, which simulates a variety of page replacement
+strategies. For instance:
+
+```shell
+./mem-sim -v -s FIFO -f 5 ./tests/input/simulation/1
+```
+
+...would simulate the memory accesses given in `./tests/input/simulation/1` using the FIFO page
+replacement strategy, with a maximum of 5 frames per process, and verbose output. See the
+[Command-Line Flags](#command-line-flags) section for more information on the command line
+arguments.
+
+## Deliverable 1
+
+The following is required for deliverable 1:
+
+- All functionality present in the starter code.
 - Pass all unit tests with `make unit-tests`.
-- Pass all end to end (e2e) tests with `make e2e-tests`.
+- Implement the following page replacement strategies: FIFO.
+  - These can be tested with `make e2e-tests`.
 - The replacement strategy can be specified using the `-–strategy` flag (See the [Simultion
   Properties](#simulation-properties) and [Simulation File Format](#simulation-file-format) sections
   for more information).
@@ -26,7 +59,16 @@ free to develop on your local machine!
 - Details about individual memory accesses are correctly displayed when the `–-verbose` flag is set
   (See the [Replacement Strategies](#replacement-strategies) section for more information).
 
-Examples of the correct output for this deliverable are provided with the starter code.
+## Deliverable 2
+
+The following is required for deliverable 2:
+
+- All functionality required in deliverable 1.
+- Implement the following **additional** page replacement strategies: LRU.
+  - These can be tested with `make e2e-tests`.
+  - Please **comment** out the `STRAGIES=("fifo") # Deliverable 1` line and **uncomment** the
+    `# STRAGIES=("fifo" "lru") # Deliverable 2` line in [`utils/e2e-tests.sh`](utils/e2e-tests.sh)
+    to run the appropriate tests.
 
 ## Grading
 
@@ -333,7 +375,7 @@ that you run using `./mem-sim`.
 The starter code contains an example simulation file, as well as a few dummy process images under
 the `inputs/` directory.
 
-11. Command-Line Flags
+## Command-Line Flags
 
 This section is provided as a reference. All the command line input parsing has been written for
 you.

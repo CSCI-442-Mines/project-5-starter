@@ -8,7 +8,8 @@
 ################################################################################
 
 # Strategies to test (One or more of: "fifo" "lru")
-STRAGIES=("fifo" "lru")
+STRAGIES=("fifo") # Deliverable 1
+# STRAGIES=("fifo" "lru") # Deliverable 2
 
 # Maximum allocatable frame numbers (One or more of: "5" "10")
 MAX_FRAME_NUMBERS=("5" "10")
