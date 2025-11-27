@@ -7,7 +7,7 @@
 > [!IMPORTANT]
 >
 > - You'll want to read this **entire document** before beginning the project. Please ask any
->   questions you have on Piazza, but only if this README does not answer your question.
+>   questions you have on Ed, but only if this README does not answer your question.
 > - Finally, this is a **large project**. Be sure to start early. If you wait until a few days
 >   before the due date, you are unlikely to finish in time.
 
@@ -21,10 +21,6 @@ free frames remaining in the system.
 
 This project must be implemented in C++, and it must execute correctly in Gradescope although feel
 free to develop on your local machine!
-
-Note that this project may be split into two deliverables or combined into one single deliverable in
-a given semester. Additionally, one, both, or neither of the deliverables may be extra-credit.
-Please check the assignment(s) in Canvas for the specific details.
 
 ## Project Requirements
 
@@ -40,13 +36,12 @@ replacement strategy, with a maximum of 5 frames per process, and verbose output
 [Command-Line Flags](#command-line-flags) section for more information on the command line
 arguments.
 
-## Deliverable 1
 
-The following is required for deliverable 1:
+**The following is required:**
 
 - All functionality present in the starter code.
 - Pass all unit tests with `make unit-tests`.
-- Implement the following page replacement strategies: FIFO.
+- Implement the following page replacement strategies: FIFO, LRU.
   - These can be tested with `make e2e-tests`.
 - The replacement strategy can be specified using the `-–strategy` flag (See the [Simultion
   Properties](#simulation-properties) and [Simulation File Format](#simulation-file-format) sections
@@ -58,17 +53,6 @@ The following is required for deliverable 1:
   Strategies](#replacement-strategies) section.
 - Details about individual memory accesses are correctly displayed when the `–-verbose` flag is set
   (See the [Replacement Strategies](#replacement-strategies) section for more information).
-
-## Deliverable 2
-
-The following is required for deliverable 2:
-
-- All functionality required in deliverable 1.
-- Implement the following **additional** page replacement strategies: LRU.
-  - These can be tested with `make e2e-tests`.
-  - Please **comment** out the `STRAGIES=("fifo") # Deliverable 1` line and **uncomment** the
-    `# STRAGIES=("fifo" "lru") # Deliverable 2` line in [`utils/e2e-tests.sh`](utils/e2e-tests.sh)
-    to run the appropriate tests.
 
 ## Grading
 
